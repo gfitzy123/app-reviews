@@ -75,7 +75,7 @@ class ResponsiveLayout extends React.Component {
 
           <Grid.Column>
             <Dropdown
-              placeholder="Newest First"
+              value="Newest First"
               fluid
               selection
               options={sortOptions}
@@ -83,7 +83,7 @@ class ResponsiveLayout extends React.Component {
           </Grid.Column>
           <Grid.Column>
             <Dropdown
-              placeholder="English"
+              value="English"
               fluid
               selection
               options={translationOptions}
@@ -94,7 +94,7 @@ class ResponsiveLayout extends React.Component {
               <FilterByRating />
             </Grid.Column>
             <Grid.Column width={10}>
-              <List relaxed="very">
+              <List divided relaxed="very">
                 <List.Item>
                   <Card.Group>
                     {reviews.feed.entry.map((review) => {

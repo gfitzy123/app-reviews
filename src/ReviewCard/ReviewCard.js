@@ -14,6 +14,7 @@ import {
   Step,
   Table,
   Dropdown,
+  Divider,
 } from "semantic-ui-react";
 
 const ReviewCard = (review) => {
@@ -23,25 +24,27 @@ const ReviewCard = (review) => {
     .map((_, i) => i * i)
     .map((star) => <Icon color="yellow" name="star" />);
   return (
-    <div>
-      <Card.Content>
-        <Card.Header>
-          <Button floated="left" disabled={true}>
-            iOS
-          </Button>
+    <div className="comment-card">
+      <Card fluid className="comment">
+        <Card.Content>
+          <Card.Header>
+            <Button floated="left" disabled={true}>
+              iOS
+            </Button>
 
-          {review.review.title.label}
-          {stars}
-        </Card.Header>
-        <Card.Meta>
-          <span className="date"></span>
-        </Card.Meta>
-        <Card.Description>{review.review.content.label}</Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        {" "}
-        <strong> by {review.review.author.name.label} </strong>
-      </Card.Content>
+            {review.review.title.label}
+            {stars}
+          </Card.Header>
+          <Card.Meta>
+            <span className="date"></span>
+          </Card.Meta>
+          <Card.Description>{review.review.content.label}</Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <strong> by {review.review.author.name.label} </strong>
+        </Card.Content>
+      </Card>
+      {/* <Segment /> */}
     </div>
   );
 };

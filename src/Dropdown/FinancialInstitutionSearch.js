@@ -31,7 +31,7 @@ export default class FinancialInstitutionSearch extends Component {
         onChange={this.handleChange}
         onSearchChange={this.handleSearchChange}
         options={financialInstitutionOptions}
-        placeholder="Financial Institution"
+        value="Webster Bank"
         search
         searchQuery={searchQuery}
         selection

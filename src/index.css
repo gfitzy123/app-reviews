@@ -19,3 +19,11 @@ div.ui.container.filter-by-rating {
 div.ui.multiple.search.selection.dropdown.fi-dropdown {
   margin-left: 90px !important;
 }
+
+div.ui.fluid.card.comment {
+  margin-top: 15px !important;
+}
+
+div.comment-card {
+  width: 100%;
+}
