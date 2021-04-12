@@ -2,13 +2,14 @@ import faker from "faker";
 import _ from "lodash";
 import React, { Component } from "react";
 import { Dropdown } from "semantic-ui-react";
+import webBank from "./webster_bank.jpg";
 
 const financialInstitutionOptions = [
   {
     key: "Webster Bank",
     text: "Webster Bank",
     value: "Webster Bank",
-    image: { avatar: true, src: "webster_bank.jpeg" },
+    image: { avatar: true, src: webBank },
   },
 ];
 
@@ -31,7 +32,7 @@ export default class FinancialInstitutionSearch extends Component {
         onChange={this.handleChange}
         onSearchChange={this.handleSearchChange}
         options={financialInstitutionOptions}
-        value="Webster Bank"
+        defaultValue="Webster Bank"
         search
         searchQuery={searchQuery}
         selection

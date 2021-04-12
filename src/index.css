@@ -27,3 +27,12 @@ div.ui.fluid.card.comment {
 div.comment-card {
   width: 100%;
 }
+
+button.ui.button.starButton {
+  color: transparent;
+  background-color: transparent;
+}
+
+button.ui.button.starButton:hover {
+  background-color: gray;
+}
