@@ -20,7 +20,8 @@ import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
 import FilterByRating from "./FilterByRating/FilterByRating";
 import ReviewCard from "./ReviewCard/ReviewCard";
 import { reviews } from "./reviews";
-
+import soundfile from "./anteUp.mp3";
+import Sound from "react-sound";
 const style = {
   h1: {
     marginTop: "3em",
@@ -72,7 +73,13 @@ class ResponsiveLayout extends React.Component {
           </Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
-
+          <Sound
+            url={soundfile}
+            playStatus={Sound.status.PLAYING}
+            onLoading={this.handleSongLoading}
+            onPlaying={this.handleSongPlaying}
+            onFinishedPlaying={this.handleSongFinishedPlaying}
+          />
           <Grid.Column>
             <Dropdown
               value="Newest First"
