@@ -13,6 +13,9 @@ code {
 }
 
 div.ui.container.filter-by-rating {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
+  margin-left: 100px !important;
+}
+
+div.ui.multiple.search.selection.dropdown.fi-dropdown {
+  margin-left: 90px !important;
 }

@@ -16,27 +16,34 @@ import {
   Dropdown,
 } from "semantic-ui-react";
 
-const ReviewCard = (props) => (
-  <div>
-    {/* <Image src="/images/avatar/large/matthew.png" wrapped ui={false} /> */}
-    <Card.Content>
-      <Card.Header>
-        <Button floated="left" disabled={true}>
-          iOS
-        </Button>
-        I use it every day!
-        <Icon color="yellow" name="star" />
-      </Card.Header>
-      <Card.Meta>
-        <span className="date"></span>
-      </Card.Meta>
-      <Card.Description>
-        I've only been using this for a short itme, but I really love it so far!
-        It's not 100 percent perfect, etc, etc. etc.
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>Hey now</Card.Content>
-  </div>
-);
+const ReviewCard = (review) => {
+  const starCount = parseInt(review.review["im:rating"].label);
+  const stars = Array(starCount)
+    .fill(0)
+    .map((_, i) => i * i)
+    .map((star) => <Icon color="yellow" name="star" />);
+  return (
+    <div>
+      <Card.Content>
+        <Card.Header>
+          <Button floated="left" disabled={true}>
+            iOS
+          </Button>
+
+          {review.review.title.label}
+          {stars}
+        </Card.Header>
+        <Card.Meta>
+          <span className="date"></span>
+        </Card.Meta>
+        <Card.Description>{review.review.content.label}</Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        {" "}
+        <strong> by {review.review.author.name.label} </strong>
+      </Card.Content>
+    </div>
+  );
+};
 
 export default ReviewCard;

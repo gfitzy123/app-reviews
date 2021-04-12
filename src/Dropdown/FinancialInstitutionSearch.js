@@ -25,6 +25,7 @@ export default class FinancialInstitutionSearch extends Component {
 
     return (
       <Dropdown
+        className="fi-dropdown"
         fluid
         multiple
         onChange={this.handleChange}

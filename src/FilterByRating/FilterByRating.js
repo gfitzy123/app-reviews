@@ -29,28 +29,28 @@ const FilterByRating = () => (
         <Icon color="yellow" name="star" />
         <Icon color="yellow" name="star" />
         <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="grey" />
+        <Icon color="grey" name="star" />
       </Grid.Row>
       <Grid.Row>
         <Icon color="yellow" name="star" />
         <Icon color="yellow" name="star" />
         <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="gray" />
-        <Icon color="yellow" name="grey" />
+        <Icon color="grey" name="star" />
+        <Icon color="grey" name="star" />
       </Grid.Row>
       <Grid.Row>
         <Icon color="yellow" name="star" />
         <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
+        <Icon color="grey" name="star" />
+        <Icon color="grey" name="star" />
+        <Icon color="grey" name="star" />
       </Grid.Row>
       <Grid.Row>
         <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
+        <Icon color="grey" name="star" />
+        <Icon color="grey" name="star" />
+        <Icon color="grey" name="star" />
+        <Icon color="grey" name="star" />
       </Grid.Row>
     </Grid>
   </Container>

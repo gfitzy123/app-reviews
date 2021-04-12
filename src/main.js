@@ -12,11 +12,14 @@ import {
   Segment,
   Step,
   Table,
+  List,
+  Card,
   Dropdown,
 } from "semantic-ui-react";
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
-import ReviewList from "./ReviewList/ReviewList";
 import FilterByRating from "./FilterByRating/FilterByRating";
+import ReviewCard from "./ReviewCard/ReviewCard";
+import { reviews } from "./reviews";
 
 const style = {
   h1: {
@@ -52,10 +55,9 @@ const translationOptions = [
   },
 ];
 
-const reviews = [];
-
 class ResponsiveLayout extends React.Component {
   render() {
+    console.log(reviews.feed.entry[0]["im:rating"].label);
     return (
       <div>
         <Header
@@ -64,8 +66,8 @@ class ResponsiveLayout extends React.Component {
           style={style.h1}
           textAlign="center"
         />
-        <Grid padded={true} columns={5} stackable>
-          <Grid.Column padded={true}>
+        <Grid columns={5} stackable>
+          <Grid.Column>
             <FinancialInstitutionSearch />
           </Grid.Column>
           <Grid.Column></Grid.Column>
@@ -87,12 +89,21 @@ class ResponsiveLayout extends React.Component {
               options={translationOptions}
             />
           </Grid.Column>
-          <Grid.Row padded={true} columns={2}>
+          <Grid.Row columns={2}>
             <Grid.Column width={4}>
               <FilterByRating />
             </Grid.Column>
             <Grid.Column width={10}>
-              <ReviewList />
+              <List relaxed="very">
+                <List.Item>
+                  <Card.Group>
+                    {reviews.feed.entry.map((review) => {
+                      //   console.log(review);
+                      return <ReviewCard review={review} />;
+                    })}
+                  </Card.Group>
+                </List.Item>
+              </List>
             </Grid.Column>
           </Grid.Row>
         </Grid>
