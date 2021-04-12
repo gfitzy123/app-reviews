@@ -58,7 +58,6 @@ const translationOptions = [
 
 class ResponsiveLayout extends React.Component {
   render() {
-    console.log(reviews.feed.entry[0]["im:rating"].label);
     return (
       <div>
         <Header
@@ -67,19 +66,24 @@ class ResponsiveLayout extends React.Component {
           style={style.h1}
           textAlign="center"
         />
+
+        <a href="url">
+          <strong> https://en.wikipedia.org/wiki/M.O.P. </strong>{" "}
+        </a>
+        <Sound
+          url={soundfile}
+          playStatus={Sound.status.PLAYING}
+          onLoading={this.handleSongLoading}
+          onPlaying={this.handleSongPlaying}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+        />
         <Grid columns={5} stackable>
           <Grid.Column>
             <FinancialInstitutionSearch />
           </Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
-          <Sound
-            url={soundfile}
-            playStatus={Sound.status.PLAYING}
-            onLoading={this.handleSongLoading}
-            onPlaying={this.handleSongPlaying}
-            onFinishedPlaying={this.handleSongFinishedPlaying}
-          />
+
           <Grid.Column>
             <Dropdown
               value="Newest First"
