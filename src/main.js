@@ -55,7 +55,38 @@ const translationOptions = [
 const reviews = [];
 
 class ResponsiveLayout extends React.Component {
+  state = {
+    selectedApps: [],
+    reviews: []
+  }
+
+  setSelectedApps = (value) => {
+    this.setState({
+      selectedApps: [...value]
+    });
+  }
+
+  fetchReviews = async () => {
+      const promises = this.state.selectedApps.map(async (selection) => {
+        const res = await fetch(`https://itunes.apple.com/US/rss/customerreviews/id=${selection.appleId}/json`)
+        return await res.json();
+      });
+      const results = await Promise.all(promises);
+      this.setState({ reviews: [...results] })
+  }
+
+  // async componentDidMount() {
+  //   await this.fetchReviews();
+  // }
+
+  async componentDidUpdate(_, prevState) {
+    if (prevState.selectedApps !== this.state.selectedApps) {
+      await this.fetchReviews();
+    }
+  }
+
   render() {
+    console.log('main', this.state)
     return (
       <div>
         <Header
@@ -66,7 +97,7 @@ class ResponsiveLayout extends React.Component {
         />
         <Grid padded={true} columns={5} stackable>
           <Grid.Column padded={true}>
-            <FinancialInstitutionSearch />
+            <FinancialInstitutionSearch selectedApps={this.state.selectedApps} setSelectedApps={this.setSelectedApps}/>
           </Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>

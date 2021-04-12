@@ -1,27 +1,35 @@
-import faker from "faker";
-import _ from "lodash";
 import React, { Component } from "react";
 import { Dropdown } from "semantic-ui-react";
 
+
+//need the appleId and playId of the selected institution
 const financialInstitutionOptions = [
   {
     key: "Webster Bank",
     text: "Webster Bank",
-    value: "Webster Bank",
+    value: {
+      name: "Webster Bank",
+      appleId: 1321994487,
+      playId: 'com.malauzai.websterbank'
+    },
     image: { avatar: true, src: "webster_bank.jpeg" },
   },
 ];
 
 export default class FinancialInstitutionSearch extends Component {
-  state = { searchQuery: "" };
+  constructor(props) {
+    super(props);
+    this.state = { searchQuery: "" };
+  }
 
-  handleChange = (e, { searchQuery, value }) =>
-    this.setState({ searchQuery, value });
+  handleChange = (e, { searchQuery, value }) => {
+    this.props.setSelectedApps(value);
+  }
 
   handleSearchChange = (e, { searchQuery }) => this.setState({ searchQuery });
 
   render() {
-    const { searchQuery, value } = this.state;
+    const { searchQuery } = this.state;
 
     return (
       <Dropdown
@@ -34,7 +42,6 @@ export default class FinancialInstitutionSearch extends Component {
         search
         searchQuery={searchQuery}
         selection
-        value={value}
       />
     );
   }
