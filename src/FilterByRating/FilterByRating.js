@@ -9,7 +9,11 @@ const FilterByRating = (props) => (
         <Dropdown text="Filter By Rating"></Dropdown>
       </Grid.Row>
       <Grid.Row>
-        <Button className="5starButton" onClick={props.filterByRating}>
+        <Button
+          className="5starButton"
+          onClick={props.filterByRating}
+          active={props.selectedRatings.indexOf(5) > -1 ? true : false}
+        >
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
@@ -18,7 +22,11 @@ const FilterByRating = (props) => (
         </Button>
       </Grid.Row>
       <Grid.Row>
-        <Button className="4starButton" onClick={props.filterByRating}>
+        <Button
+          className="4starButton"
+          onClick={props.filterByRating}
+          active={props.selectedRatings.indexOf(4) > -1 ? true : false}
+        >
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
@@ -27,7 +35,11 @@ const FilterByRating = (props) => (
         </Button>
       </Grid.Row>
       <Grid.Row>
-        <Button className="3starButton" onClick={props.filterByRating}>
+        <Button
+          className="3starButton"
+          onClick={props.filterByRating}
+          active={props.selectedRatings.indexOf(3) > -1 ? true : false}
+        >
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
@@ -36,7 +48,11 @@ const FilterByRating = (props) => (
         </Button>
       </Grid.Row>
       <Grid.Row>
-        <Button className="2starButton" onClick={props.filterByRating}>
+        <Button
+          className="2starButton"
+          onClick={props.filterByRating}
+          active={props.selectedRatings.indexOf(2) > -1 ? true : false}
+        >
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
           <Icon color="grey" name="star" />
@@ -45,7 +61,11 @@ const FilterByRating = (props) => (
         </Button>
       </Grid.Row>
       <Grid.Row>
-        <Button className="1starButton" onClick={props.filterByRating}>
+        <Button
+          className="1starButton"
+          onClick={props.filterByRating}
+          active={props.selectedRatings.indexOf(1) > -1 ? true : false}
+        >
           <Icon color="yellow" name="star" />
           <Icon color="grey" name="star" />
           <Icon color="grey" name="star" />

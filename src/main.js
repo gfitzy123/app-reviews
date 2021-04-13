@@ -3,7 +3,7 @@ import { Grid, Header, List, Card, Dropdown, Input } from "semantic-ui-react";
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
 import FilterByRating from "./FilterByRating/FilterByRating";
 import ReviewCard from "./ReviewCard/ReviewCard";
-import { flatten } from "lodash";
+import { flatten, compact, orderBy } from "lodash";
 import Fuse from "fuse.js";
 const style = {
   h1: {
@@ -26,6 +26,12 @@ const sortOptions = [
     key: "Newest First",
     text: "Newest First",
     value: "Newest First",
+    //   image: { avatar: true, src: "./webster_bank.jpeg" },
+  },
+  {
+    key: "Rating",
+    text: "Rating",
+    value: "Rating",
     //   image: { avatar: true, src: "./webster_bank.jpeg" },
   },
 ];
@@ -57,18 +63,13 @@ const fuseOptions = {
 };
 
 class ResponsiveLayout extends React.Component {
-  // state = {
-  //   selectedApps: [],
-  //   reviews: [],
-  //   query: "",
-  // };
-
   constructor(props) {
     super(props);
     this.state = {
       selectedApps: [],
       reviews: [],
       query: "",
+      ratingsSelected: [],
     };
 
     this.onChange = this.onChange.bind(this);
@@ -99,6 +100,7 @@ class ResponsiveLayout extends React.Component {
     });
     const reviews = flatten(entries);
     this.setState({ reviews });
+    return reviews;
   };
 
   async componentDidUpdate(_, prevState) {
@@ -107,7 +109,7 @@ class ResponsiveLayout extends React.Component {
     }
   }
 
-  filterByRatingHandler = (e, v) => {
+  filterByRatingHandler = async (e, v) => {
     const buttonName = v.className;
     let starRating = 0;
 
@@ -131,11 +133,49 @@ class ResponsiveLayout extends React.Component {
         starRating = 5;
     }
 
-    const currentReviews = this.state.reviews;
-    const newReviewOrder = currentReviews.filter((review) => {
-      return parseInt(review["im:rating"].label) === starRating;
-    });
-    this.setState({ reviews: newReviewOrder });
+    let currentlySelectedRatings = this.state.ratingsSelected;
+
+    if (currentlySelectedRatings.indexOf(starRating) === -1) {
+      let arrayPosition = starRating - 1;
+      currentlySelectedRatings[starRating - 1] = starRating;
+    } else {
+      currentlySelectedRatings.splice(starRating - 1, starRating);
+    }
+
+    if (compact(currentlySelectedRatings).length === 0) {
+      this.fetchReviews();
+      return;
+    }
+
+    let allReviews = await this.fetchReviews();
+    let reviews = [];
+
+    for (let i = currentlySelectedRatings.length; i >= 0; i--) {
+      const filteredReviews = allReviews.filter((review) => {
+        return (
+          parseInt(review["im:rating"].label) === currentlySelectedRatings[i]
+        );
+      });
+
+      reviews = reviews.concat(filteredReviews);
+    }
+
+    this.setState({ reviews, selectedRatings: currentlySelectedRatings });
+  };
+
+  sortChangeHandler = (e, v) => {
+    if (v.value === "Rating") {
+      {
+      }
+      const orderedReviews = orderBy(
+        this.state.reviews,
+        [`im:rating[label]`],
+        ["desc"]
+      );
+      this.setState({ reviews: orderedReviews });
+    } else {
+      this.fetchReviews();
+    }
   };
 
   render() {
@@ -169,10 +209,11 @@ class ResponsiveLayout extends React.Component {
 
           <Grid.Column>
             <Dropdown
-              value="Newest First"
+              defaultValue="Newest First"
               fluid
               selection
               options={sortOptions}
+              onChange={this.sortChangeHandler}
             />
           </Grid.Column>
           <Grid.Column>
@@ -185,7 +226,10 @@ class ResponsiveLayout extends React.Component {
           </Grid.Column>
           <Grid.Row columns={2}>
             <Grid.Column width={4}>
-              <FilterByRating filterByRating={this.filterByRatingHandler} />
+              <FilterByRating
+                filterByRating={this.filterByRatingHandler}
+                selectedRatings={this.state.ratingsSelected}
+              />
             </Grid.Column>
             <Grid.Column width={10}>
               <List divided relaxed="very">
