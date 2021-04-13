@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Header, List, Card, Dropdown } from "semantic-ui-react";
+import { Grid, Header, List, Card, Dropdown, Input } from "semantic-ui-react";
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
 import FilterByRating from "./FilterByRating/FilterByRating";
 import ReviewCard from "./ReviewCard/ReviewCard";
@@ -160,7 +160,7 @@ class ResponsiveLayout extends React.Component {
             />
           </Grid.Column>
           <Grid.Column>
-            <input
+            <Input
               placeholder="Search for comments.."
               onChange={this.onChange}
             />
