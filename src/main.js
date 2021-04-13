@@ -1,17 +1,10 @@
 import React from "react";
-import {
-  Grid,
-  Header,
-  List,
-  Card,
-  Dropdown,
-} from "semantic-ui-react";
+import { Grid, Header, List, Card, Dropdown } from "semantic-ui-react";
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
 import FilterByRating from "./FilterByRating/FilterByRating";
 import ReviewCard from "./ReviewCard/ReviewCard";
-import { flatten } from 'lodash';
-import soundfile from "./anteUp.mp3";
-import Sound from "react-sound";
+import { flatten } from "lodash";
+
 const style = {
   h1: {
     marginTop: "3em",
@@ -49,27 +42,29 @@ const translationOptions = [
 class ResponsiveLayout extends React.Component {
   state = {
     selectedApps: [],
-    reviews: []
-  }
+    reviews: [],
+  };
 
   setSelectedApps = (value) => {
     this.setState({
-      selectedApps: [...value]
+      selectedApps: [...value],
     });
-  }
+  };
 
   fetchReviews = async () => {
-      const promises = this.state.selectedApps.map(async (selection) => {
-        const res = await fetch(`https://itunes.apple.com/US/rss/customerreviews/id=${selection.appleId}/json`)
-        return await res.json();
-      });
-      const results = await Promise.all(promises);
-      const entries = results.map((financialInstitution) => {
-        return financialInstitution.feed.entry
-      });
-      const reviews = flatten(entries);
-      this.setState({ reviews })
-  }
+    const promises = this.state.selectedApps.map(async (selection) => {
+      const res = await fetch(
+        `https://itunes.apple.com/US/rss/customerreviews/id=${selection.appleId}/json`
+      );
+      return await res.json();
+    });
+    const results = await Promise.all(promises);
+    const entries = results.map((financialInstitution) => {
+      return financialInstitution.feed.entry;
+    });
+    const reviews = flatten(entries);
+    this.setState({ reviews });
+  };
 
   async componentDidUpdate(_, prevState) {
     if (prevState.selectedApps !== this.state.selectedApps) {
@@ -90,16 +85,13 @@ class ResponsiveLayout extends React.Component {
         <a href="url">
           <strong> https://en.wikipedia.org/wiki/M.O.P. </strong>{" "}
         </a>
-        <Sound
-          url={soundfile}
-          playStatus={Sound.status.PLAYING}
-          onLoading={this.handleSongLoading}
-          onPlaying={this.handleSongPlaying}
-          onFinishedPlaying={this.handleSongFinishedPlaying}
-        />
+
         <Grid columns={5} stackable>
           <Grid.Column>
-            <FinancialInstitutionSearch selectedApps={this.state.selectedApps} setSelectedApps={this.setSelectedApps}/>
+            <FinancialInstitutionSearch
+              selectedApps={this.state.selectedApps}
+              setSelectedApps={this.setSelectedApps}
+            />
           </Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
