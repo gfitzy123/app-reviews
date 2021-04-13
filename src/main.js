@@ -3,7 +3,7 @@ import { Grid, Header, List, Card, Dropdown } from "semantic-ui-react";
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
 import FilterByRating from "./FilterByRating/FilterByRating";
 import ReviewCard from "./ReviewCard/ReviewCard";
-import { flatten } from "lodash";
+import { flatten, orderBy } from "lodash";
 
 const style = {
   h1: {
@@ -72,6 +72,35 @@ class ResponsiveLayout extends React.Component {
     }
   }
 
+  filterByRatingHandler = (e, v) => {
+    const buttonName = v.className;
+    let starRating = 0;
+
+    switch (buttonName) {
+      case "5starButton":
+        starRating = 5;
+        break;
+      case "4starButton":
+        starRating = 4;
+        break;
+      case "3starButton":
+        starRating = 3;
+        break;
+      case "2starButton":
+        starRating = 2;
+        break;
+      case "1starButton":
+        starRating = 1;
+        break;
+    }
+
+    const currentReviews = this.state.reviews;
+    const newReviewOrder = currentReviews.filter((review) => {
+      return parseInt(review["im:rating"].label) === starRating;
+    });
+    this.setState({ reviews: newReviewOrder });
+  };
+
   render() {
     return (
       <div>
@@ -81,10 +110,6 @@ class ResponsiveLayout extends React.Component {
           style={style.h1}
           textAlign="center"
         />
-
-        <a href="url">
-          <strong> https://en.wikipedia.org/wiki/M.O.P. </strong>{" "}
-        </a>
 
         <Grid columns={5} stackable>
           <Grid.Column>
@@ -114,7 +139,7 @@ class ResponsiveLayout extends React.Component {
           </Grid.Column>
           <Grid.Row columns={2}>
             <Grid.Column width={4}>
-              <FilterByRating />
+              <FilterByRating filterByRating={this.filterByRatingHandler} />
             </Grid.Column>
             <Grid.Column width={10}>
               <List divided relaxed="very">
