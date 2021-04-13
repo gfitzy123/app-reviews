@@ -7,6 +7,7 @@ import {
   Container,
   Grid,
   GridRow,
+  Button,
   Dropdown,
 } from "semantic-ui-react";
 import ReviewCard from "../ReviewCard/ReviewCard";
@@ -18,39 +19,49 @@ const FilterByRating = () => (
         <Dropdown text="Filter By Rating"></Dropdown>
       </Grid.Row>
       <Grid.Row>
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
+        <Button className="starButton">
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+        </Button>
       </Grid.Row>
       <Grid.Row>
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="grey" />
+        <Button className="starButton">
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="grey" name="star" />
+        </Button>
       </Grid.Row>
       <Grid.Row>
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="gray" />
-        <Icon color="yellow" name="grey" />
+        <Button className="starButton">
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="grey" name="star" />
+          <Icon color="grey" name="star" />
+        </Button>
       </Grid.Row>
       <Grid.Row>
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
+        <Button className="starButton">
+          <Icon color="yellow" name="star" />
+          <Icon color="yellow" name="star" />
+          <Icon color="grey" name="star" />
+          <Icon color="grey" name="star" />
+          <Icon color="grey" name="star" />
+        </Button>
       </Grid.Row>
       <Grid.Row>
-        <Icon color="yellow" name="star" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
-        <Icon color="yellow" name="grey" />
+        <Button className="starButton">
+          <Icon color="yellow" name="star" />
+          <Icon color="grey" name="star" />
+          <Icon color="grey" name="star" />
+          <Icon color="grey" name="star" />
+          <Icon color="grey" name="star" />
+        </Button>
       </Grid.Row>
     </Grid>
   </Container>

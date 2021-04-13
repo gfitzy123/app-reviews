@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown } from "semantic-ui-react";
+import webBank from "./webster_bank.jpg";
 
 
 //need the appleId and playId of the selected institution
@@ -12,7 +13,7 @@ const financialInstitutionOptions = [
       appleId: 1321994487,
       playId: 'com.malauzai.websterbank'
     },
-    image: { avatar: true, src: "webster_bank.jpeg" },
+    image: { avatar: true, src: webBank },
   },
   {
     key: 'DH25924',
@@ -105,12 +106,13 @@ export default class FinancialInstitutionSearch extends Component {
 
     return (
       <Dropdown
+        className="fi-dropdown"
         fluid
         multiple
         onChange={this.handleChange}
         onSearchChange={this.handleSearchChange}
         options={financialInstitutionOptions}
-        placeholder="Financial Institution"
+        defaultValue="Webster Bank"
         search
         searchQuery={searchQuery}
         selection

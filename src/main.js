@@ -1,23 +1,17 @@
 import React from "react";
 import {
-  Button,
-  Container,
   Grid,
   Header,
-  Icon,
-  Image,
-  Item,
-  Label,
-  Menu,
-  Segment,
-  Step,
-  Table,
+  List,
+  Card,
   Dropdown,
 } from "semantic-ui-react";
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
-import ReviewList from "./ReviewList/ReviewList";
 import FilterByRating from "./FilterByRating/FilterByRating";
-
+import ReviewCard from "./ReviewCard/ReviewCard";
+import { reviews } from "./reviews";
+import soundfile from "./anteUp.mp3";
+import Sound from "react-sound";
 const style = {
   h1: {
     marginTop: "3em",
@@ -89,8 +83,19 @@ class ResponsiveLayout extends React.Component {
           style={style.h1}
           textAlign="center"
         />
-        <Grid padded={true} columns={5} stackable>
-          <Grid.Column padded={true}>
+
+        <a href="url">
+          <strong> https://en.wikipedia.org/wiki/M.O.P. </strong>{" "}
+        </a>
+        <Sound
+          url={soundfile}
+          playStatus={Sound.status.PLAYING}
+          onLoading={this.handleSongLoading}
+          onPlaying={this.handleSongPlaying}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+        />
+        <Grid columns={5} stackable>
+          <Grid.Column>
             <FinancialInstitutionSearch selectedApps={this.state.selectedApps} setSelectedApps={this.setSelectedApps}/>
           </Grid.Column>
           <Grid.Column></Grid.Column>
@@ -98,7 +103,7 @@ class ResponsiveLayout extends React.Component {
 
           <Grid.Column>
             <Dropdown
-              placeholder="Newest First"
+              value="Newest First"
               fluid
               selection
               options={sortOptions}
@@ -106,18 +111,27 @@ class ResponsiveLayout extends React.Component {
           </Grid.Column>
           <Grid.Column>
             <Dropdown
-              placeholder="English"
+              value="English"
               fluid
               selection
               options={translationOptions}
             />
           </Grid.Column>
-          <Grid.Row padded={true} columns={2}>
+          <Grid.Row columns={2}>
             <Grid.Column width={4}>
               <FilterByRating />
             </Grid.Column>
             <Grid.Column width={10}>
-              <ReviewList />
+              <List divided relaxed="very">
+                <List.Item>
+                  <Card.Group>
+                    {reviews.feed.entry.map((review) => {
+                      //   console.log(review);
+                      return <ReviewCard review={review} />;
+                    })}
+                  </Card.Group>
+                </List.Item>
+              </List>
             </Grid.Column>
           </Grid.Row>
         </Grid>
