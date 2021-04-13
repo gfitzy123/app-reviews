@@ -1,6 +1,5 @@
 import React from "react";
 import { Icon, Container, Grid, Button, Dropdown } from "semantic-ui-react";
-import ReviewCard from "../ReviewCard/ReviewCard";
 
 const FilterByRating = (props) => (
   <Container className="filter-by-rating">
