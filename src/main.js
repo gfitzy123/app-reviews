@@ -52,8 +52,6 @@ const translationOptions = [
   },
 ];
 
-const reviews = [];
-
 class ResponsiveLayout extends React.Component {
   state = {
     selectedApps: [],
@@ -75,10 +73,6 @@ class ResponsiveLayout extends React.Component {
       this.setState({ reviews: [...results] })
   }
 
-  // async componentDidMount() {
-  //   await this.fetchReviews();
-  // }
-
   async componentDidUpdate(_, prevState) {
     if (prevState.selectedApps !== this.state.selectedApps) {
       await this.fetchReviews();
@@ -86,7 +80,7 @@ class ResponsiveLayout extends React.Component {
   }
 
   render() {
-    console.log('main', this.state)
+    console.log(this.state)
     return (
       <div>
         <Header

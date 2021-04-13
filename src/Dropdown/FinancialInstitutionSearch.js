@@ -14,6 +14,78 @@ const financialInstitutionOptions = [
     },
     image: { avatar: true, src: "webster_bank.jpeg" },
   },
+  {
+    key: 'DH25924',
+    text: 'DH25924',
+    value: {
+      name: 'DH25924',
+      appleId: 1440599657
+    }
+  },
+  {
+    key: 'DH25924biz',
+    text: 'DH25924biz',
+    value: {
+      name: 'DH25924biz',
+      appleId: 1440601027
+    }
+  },
+  {
+    key: 'CAT62452',
+    text: 'CAT62452',
+    value: {
+      name: 'CAT62452',
+      appleId: 898425587
+    }
+  },
+  {
+    key: 'BTBB7343',
+    text: 'BTBB7343',
+    value: {
+      name: 'BTBB7343',
+      appleId: 912099688
+    }
+  },
+  {
+    key: 'DH11803biz',
+    text: 'DH11803biz',
+    value: {
+      name: 'DH11803biz',
+      appleId: 1492373642
+    }
+  },
+  {
+    key: 'downey',
+    text: 'downey',
+    value: {
+      name: 'downey',
+      appleId: 1220572008
+    }
+  },
+  {
+    key: 'DH21373',
+    text: 'DH21373',
+    value: {
+      name: 'DH21373',
+      appleId: 1141918706
+    }
+  },
+  {
+    key: 'DH21326',
+    text: 'DH21326',
+    value: {
+      name: 'DH21326',
+      appleId: 1181142880
+    }
+  },
+  {
+    key: 'DH10543',
+    text: 'DH10543',
+    value: {
+      name: 'DH10543',
+      appleId: 1071451651
+    }
+  }
 ];
 
 export default class FinancialInstitutionSearch extends Component {
