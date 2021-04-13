@@ -9,7 +9,7 @@ import {
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
 import FilterByRating from "./FilterByRating/FilterByRating";
 import ReviewCard from "./ReviewCard/ReviewCard";
-import { reviews } from "./reviews";
+import { flatten } from 'lodash';
 import soundfile from "./anteUp.mp3";
 import Sound from "react-sound";
 const style = {
@@ -64,7 +64,11 @@ class ResponsiveLayout extends React.Component {
         return await res.json();
       });
       const results = await Promise.all(promises);
-      this.setState({ reviews: [...results] })
+      const entries = results.map((financialInstitution) => {
+        return financialInstitution.feed.entry
+      });
+      const reviews = flatten(entries);
+      this.setState({ reviews })
   }
 
   async componentDidUpdate(_, prevState) {
@@ -74,7 +78,6 @@ class ResponsiveLayout extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         <Header
@@ -125,7 +128,7 @@ class ResponsiveLayout extends React.Component {
               <List divided relaxed="very">
                 <List.Item>
                   <Card.Group>
-                    {reviews.feed.entry.map((review) => {
+                    {this.state.reviews.map((review) => {
                       //   console.log(review);
                       return <ReviewCard review={review} />;
                     })}
