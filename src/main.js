@@ -3,8 +3,8 @@ import { Grid, Header, List, Card, Dropdown } from "semantic-ui-react";
 import FinancialInstitutionSearch from "./Dropdown/FinancialInstitutionSearch";
 import FilterByRating from "./FilterByRating/FilterByRating";
 import ReviewCard from "./ReviewCard/ReviewCard";
-import { flatten, orderBy } from "lodash";
-
+import { flatten } from "lodash";
+import Fuse from "fuse.js";
 const style = {
   h1: {
     marginTop: "3em",
@@ -39,17 +39,52 @@ const translationOptions = [
   },
 ];
 
+const keys = {
+  TITLE: "title.label",
+  COMMENT: "im:rating.label",
+  AUTHOR: "author.name.label",
+};
+const { TITLE, COMMENT, AUTHOR } = keys;
+
+const fuseOptions = {
+  shouldSort: true,
+  threshold: 0.4,
+  location: 0,
+  distance: 50,
+  maxPatternLength: 12,
+  minMatchCharLength: 3,
+  keys: [TITLE, COMMENT, AUTHOR],
+};
+
 class ResponsiveLayout extends React.Component {
-  state = {
-    selectedApps: [],
-    reviews: [],
-  };
+  // state = {
+  //   selectedApps: [],
+  //   reviews: [],
+  //   query: "",
+  // };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedApps: [],
+      reviews: [],
+      query: "",
+    };
+
+    this.onChange = this.onChange.bind(this);
+  }
 
   setSelectedApps = (value) => {
     this.setState({
       selectedApps: [...value],
     });
   };
+
+  onChange(e) {
+    const { target = {} } = e;
+    const { value = "" } = target;
+    this.setState({ query: value });
+  }
 
   fetchReviews = async () => {
     const promises = this.state.selectedApps.map(async (selection) => {
@@ -92,6 +127,8 @@ class ResponsiveLayout extends React.Component {
       case "1starButton":
         starRating = 1;
         break;
+      default:
+        starRating = 5;
     }
 
     const currentReviews = this.state.reviews;
@@ -102,6 +139,10 @@ class ResponsiveLayout extends React.Component {
   };
 
   render() {
+    const { reviews = [], query = "" } = this.state;
+    const fuse = new Fuse(reviews, fuseOptions);
+    const data = query ? fuse.search(query) : reviews;
+    const reviewsJsx = data.map((x, i) => <ReviewCard key={i} review={x} />);
     return (
       <div>
         <Header
@@ -118,7 +159,12 @@ class ResponsiveLayout extends React.Component {
               setSelectedApps={this.setSelectedApps}
             />
           </Grid.Column>
-          <Grid.Column></Grid.Column>
+          <Grid.Column>
+            <input
+              placeholder="Search for comments.."
+              onChange={this.onChange}
+            />
+          </Grid.Column>
           <Grid.Column></Grid.Column>
 
           <Grid.Column>
@@ -144,12 +190,7 @@ class ResponsiveLayout extends React.Component {
             <Grid.Column width={10}>
               <List divided relaxed="very">
                 <List.Item>
-                  <Card.Group>
-                    {this.state.reviews.map((review) => {
-                      //   console.log(review);
-                      return <ReviewCard review={review} />;
-                    })}
-                  </Card.Group>
+                  <Card.Group>{reviewsJsx}</Card.Group>
                 </List.Item>
               </List>
             </Grid.Column>

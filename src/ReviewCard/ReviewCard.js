@@ -1,24 +1,13 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
-import {
-  Button,
-  Container,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  Item,
-  Label,
-  Menu,
-  Segment,
-  Step,
-  Table,
-  Dropdown,
-  Divider,
-} from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 
-const ReviewCard = (review) => {
-  const starCount = parseInt(review.review["im:rating"].label);
+const ReviewCard = (reviewData) => {
+  const review = reviewData.review.item
+    ? reviewData.review.item
+    : reviewData.review;
+
+  const starCount = parseInt(review["im:rating"].label);
   const stars = Array(starCount)
     .fill(0)
     .map((_, i) => i * i)
@@ -31,20 +20,18 @@ const ReviewCard = (review) => {
             <Button floated="left" disabled={true}>
               iOS
             </Button>
-
-            {review.review.title.label}
+            {review.title.label}
             {stars}
           </Card.Header>
           <Card.Meta>
             <span className="date"></span>
           </Card.Meta>
-          <Card.Description>{review.review.content.label}</Card.Description>
+          <Card.Description>{review.content.label}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <strong> by {review.review.author.name.label} </strong>
+          <strong> by {review.author.name.label} </strong>
         </Card.Content>
       </Card>
-      {/* <Segment /> */}
     </div>
   );
 };
